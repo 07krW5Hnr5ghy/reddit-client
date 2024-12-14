@@ -55,19 +55,20 @@ addRedditbutton.addEventListener("click",()=>{
                 const headerTitle = document.createElement("span");
                 headerTitle.textContent = `r/${subRedditInput.value}`;
                 newRedditLaneHeader.appendChild(headerTitle);
+                newRedditLane.appendChild(newRedditLaneHeader);
 
                 subRedditData.forEach(post=>{
                     const newPost = document.createElement("div");
+                    const postScore = document.createElement("span");
                     const postTitle = document.createElement("span");
                     postTitle.textContent = post.data.title;
+                    postScore.textContent = post.data.score;
 
+                    newPost.appendChild(postScore);
                     newPost.appendChild(postTitle);
                     newRedditLane.appendChild(newPost);
 
                 });
-
-                
-                newRedditLane.appendChild(newRedditLaneHeader);
 
                 mainContainer.innerHTML = "";
 
