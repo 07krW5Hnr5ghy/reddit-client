@@ -51,7 +51,7 @@ addRedditbutton.addEventListener("click",()=>{
                 console.log("no existe el subreddit");
             }else{
                 const newRedditLane = document.createElement("div");
-                
+                newRedditLane.classList.add("reddit-lane");
                 const newRedditLaneHeader = document.createElement("div");
                 const headerTitle = document.createElement("span");
                 headerTitle.textContent = `r/${subRedditInput.value}`;
@@ -102,6 +102,28 @@ addRedditbutton.addEventListener("click",()=>{
                         mainContainer.appendChild(lane);
                     });
                     mainContainer.appendChild(buttonContainer);
+                }
+
+                if(mainContainer.childElementCount>3){
+                    const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
+                    mainContainer.innerHTML = "";
+
+                    subRedditData.forEach(post=>{
+                        const newPost = document.createElement("div");
+                        const postScore = document.createElement("span");
+                        const postTitle = document.createElement("span");
+                        postTitle.textContent = post.data.title;
+                        postScore.textContent = post.data.score;
+    
+                        newPost.appendChild(postScore);
+                        newPost.appendChild(postTitle);
+                        newRedditLane.appendChild(newPost);
+                    });
+
+                    mainContainer.appendChild(newRedditLane);
+                    previousLanes.forEach(lane=>{
+                        mainContainer.appendChild(lane);
+                    });
                 }
 
             }
