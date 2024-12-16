@@ -58,8 +58,56 @@ addRedditbutton.addEventListener("click",()=>{
                 newRedditLaneHeader.appendChild(headerTitle);
                 newRedditLane.appendChild(newRedditLaneHeader);
 
-                if(mainContainer.childElementCount===1){
-                    newRedditLane.classList.add("reddit-lane-border");
+                if(mainContainer.childElementCount===3){
+                    const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
+                    mainContainer.innerHTML = "";
+
+                    subRedditData.forEach(post=>{
+                        const newPost = document.createElement("div");
+                        newPost.classList.add("reddit-post");
+                        newPost.classList.add("reddit-post-border");
+                        const postScore = document.createElement("span");
+                        const postTitle = document.createElement("span");
+                        postTitle.textContent = post.data.title;
+                        postScore.textContent = post.data.score;
+    
+                        newPost.appendChild(postScore);
+                        newPost.appendChild(postTitle);
+                        newRedditLane.appendChild(newPost);
+                    });
+
+                    mainContainer.appendChild(newRedditLane);
+                    previousLanes.forEach(lane=>{
+                        lane.classList.remove("reddit-lane-border-right");
+                        lane.classList.add("reddit-lane-border-left");
+                        mainContainer.appendChild(lane);
+                    }); 
+                }else if(mainContainer.childElementCount===2){
+                    const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
+                    mainContainer.innerHTML = "";
+                    newRedditLane.classList.add("reddit-lane-border-right");
+
+                    subRedditData.forEach(post=>{
+                        const newPost = document.createElement("div");
+                        newPost.classList.add("reddit-post");
+                        newPost.classList.add("reddit-post-border");
+                        const postScore = document.createElement("span");
+                        const postTitle = document.createElement("span");
+                        postTitle.textContent = post.data.title;
+                        postScore.textContent = post.data.score;
+    
+                        newPost.appendChild(postScore);
+                        newPost.appendChild(postTitle);
+                        newRedditLane.appendChild(newPost);
+                    });
+
+                    mainContainer.appendChild(newRedditLane);
+                    previousLanes.forEach(lane=>{
+                        mainContainer.appendChild(lane);
+                    });
+                    mainContainer.appendChild(buttonContainer);
+                }else if(mainContainer.childElementCount===1){
+                    newRedditLane.classList.add("reddit-lane-border-right");
                     console.log(subRedditData);
                     subRedditData.forEach((post,index)=>{
                         const newPost = document.createElement("div");
@@ -81,51 +129,78 @@ addRedditbutton.addEventListener("click",()=>{
     
                     mainContainer.appendChild(newRedditLane);
                     mainContainer.appendChild(buttonContainer);
-                }else if(mainContainer.childElementCount>1){
-                    const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
-                    mainContainer.innerHTML = "";
-                    newRedditLane.classList.add("reddit-lane-border");
-
-                    subRedditData.forEach(post=>{
-                        const newPost = document.createElement("div");
-                        newPost.classList.add("reddit-post");
-                        const postScore = document.createElement("span");
-                        const postTitle = document.createElement("span");
-                        postTitle.textContent = post.data.title;
-                        postScore.textContent = post.data.score;
-    
-                        newPost.appendChild(postScore);
-                        newPost.appendChild(postTitle);
-                        newRedditLane.appendChild(newPost);
-                    });
-
-                    mainContainer.appendChild(newRedditLane);
-                    previousLanes.forEach(lane=>{
-                        mainContainer.appendChild(lane);
-                    });
-                    mainContainer.appendChild(buttonContainer);
-                }else if(mainContainer.childElementCount>3){
-                    const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
-                    mainContainer.innerHTML = "";
-
-                    subRedditData.forEach(post=>{
-                        const newPost = document.createElement("div");
-                        newPost.classList.add("reddit-post");
-                        const postScore = document.createElement("span");
-                        const postTitle = document.createElement("span");
-                        postTitle.textContent = post.data.title;
-                        postScore.textContent = post.data.score;
-    
-                        newPost.appendChild(postScore);
-                        newPost.appendChild(postTitle);
-                        newRedditLane.appendChild(newPost);
-                    });
-
-                    mainContainer.appendChild(newRedditLane);
-                    previousLanes.forEach(lane=>{
-                        mainContainer.appendChild(lane);
-                    });
                 }
+
+                // if(mainContainer.childElementCount===1){
+                //     newRedditLane.classList.add("reddit-lane-border");
+                //     console.log(subRedditData);
+                //     subRedditData.forEach((post,index)=>{
+                //         const newPost = document.createElement("div");
+                //         newPost.classList.add("reddit-post");
+                //         newPost.classList.add("reddit-post-border");
+                        
+                //         const postScore = document.createElement("span");
+                //         const postTitle = document.createElement("span");
+                //         postTitle.textContent = post.data.title;
+                //         postScore.textContent = post.data.score;
+    
+                //         newPost.appendChild(postScore);
+                //         newPost.appendChild(postTitle);
+                //         newRedditLane.appendChild(newPost);
+    
+                //     });
+    
+                //     mainContainer.innerHTML = "";
+    
+                //     mainContainer.appendChild(newRedditLane);
+                //     mainContainer.appendChild(buttonContainer);
+                // }else if(mainContainer.childElementCount>1){
+                //     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
+                //     mainContainer.innerHTML = "";
+                //     newRedditLane.classList.add("reddit-lane-border");
+
+                //     subRedditData.forEach(post=>{
+                //         const newPost = document.createElement("div");
+                //         newPost.classList.add("reddit-post");
+                //         newPost.classList.add("reddit-post-border");
+                //         const postScore = document.createElement("span");
+                //         const postTitle = document.createElement("span");
+                //         postTitle.textContent = post.data.title;
+                //         postScore.textContent = post.data.score;
+    
+                //         newPost.appendChild(postScore);
+                //         newPost.appendChild(postTitle);
+                //         newRedditLane.appendChild(newPost);
+                //     });
+
+                //     mainContainer.appendChild(newRedditLane);
+                //     previousLanes.forEach(lane=>{
+                //         mainContainer.appendChild(lane);
+                //     });
+                //     mainContainer.appendChild(buttonContainer);
+                // }else if(mainContainer.childElementCount>3){
+                //     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
+                //     mainContainer.innerHTML = "";
+
+                //     subRedditData.forEach(post=>{
+                //         const newPost = document.createElement("div");
+                //         newPost.classList.add("reddit-post");
+                //         newPost.classList.add("reddit-post-border");
+                //         const postScore = document.createElement("span");
+                //         const postTitle = document.createElement("span");
+                //         postTitle.textContent = post.data.title;
+                //         postScore.textContent = post.data.score;
+    
+                //         newPost.appendChild(postScore);
+                //         newPost.appendChild(postTitle);
+                //         newRedditLane.appendChild(newPost);
+                //     });
+
+                //     mainContainer.appendChild(newRedditLane);
+                //     previousLanes.forEach(lane=>{
+                //         mainContainer.appendChild(lane);
+                //     });
+                // }
 
             }
         });

@@ -18,11 +18,14 @@
     flex-direction: column;
     justify-content: stretch;
     align-items: start;
-    overflow: scroll;
+    overflow-x: scroll;
     min-height: 100vh;
 }
-.reddit-lane-border{
+.reddit-lane-border-right{
     border-right: 2px solid black;
+}
+.reddit-lane-border-left{
+    border-left: 2px solid black;
 }
 .reddit-post{
     display: flex;
