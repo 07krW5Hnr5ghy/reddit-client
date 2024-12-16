@@ -59,8 +59,13 @@ addRedditbutton.addEventListener("click",()=>{
                 newRedditLane.appendChild(newRedditLaneHeader);
 
                 if(mainContainer.childElementCount===1){
-                    subRedditData.forEach(post=>{
+                    newRedditLane.classList.add("reddit-lane-border");
+                    console.log(subRedditData);
+                    subRedditData.forEach((post,index)=>{
                         const newPost = document.createElement("div");
+                        newPost.classList.add("reddit-post");
+                        newPost.classList.add("reddit-post-border");
+                        
                         const postScore = document.createElement("span");
                         const postTitle = document.createElement("span");
                         postTitle.textContent = post.data.title;
@@ -76,17 +81,14 @@ addRedditbutton.addEventListener("click",()=>{
     
                     mainContainer.appendChild(newRedditLane);
                     mainContainer.appendChild(buttonContainer);
-                }
-
-                if(mainContainer.childElementCount>1){
-
-                    console.log(mainContainer.children);
-                    console.log(Array.isArray(mainContainer.children));
+                }else if(mainContainer.childElementCount>1){
                     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
                     mainContainer.innerHTML = "";
+                    newRedditLane.classList.add("reddit-lane-border");
 
                     subRedditData.forEach(post=>{
                         const newPost = document.createElement("div");
+                        newPost.classList.add("reddit-post");
                         const postScore = document.createElement("span");
                         const postTitle = document.createElement("span");
                         postTitle.textContent = post.data.title;
@@ -102,14 +104,13 @@ addRedditbutton.addEventListener("click",()=>{
                         mainContainer.appendChild(lane);
                     });
                     mainContainer.appendChild(buttonContainer);
-                }
-
-                if(mainContainer.childElementCount>3){
+                }else if(mainContainer.childElementCount>3){
                     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
                     mainContainer.innerHTML = "";
 
                     subRedditData.forEach(post=>{
                         const newPost = document.createElement("div");
+                        newPost.classList.add("reddit-post");
                         const postScore = document.createElement("span");
                         const postTitle = document.createElement("span");
                         postTitle.textContent = post.data.title;
