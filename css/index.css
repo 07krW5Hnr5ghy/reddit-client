@@ -27,6 +27,14 @@
 .reddit-lane-border-left{
     border-left: 2px solid black;
 }
+.reddit-lane-header{
+    width: 100%;
+    border-bottom: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 .reddit-post{
     display: flex;
     flex-direction: row;
