@@ -25,6 +25,24 @@ async function getSubRedditData(subReddit){
     }
 }
 
+function renderPosts(posts,newRedditLane){
+    posts.forEach(post=>{
+        const newPost = document.createElement("div");
+        newPost.classList.add("reddit-post");
+        newPost.classList.add("reddit-post-border");
+        const postScore = document.createElement("span");
+        const postTitle = document.createElement("a");
+        postTitle.textContent = post.data.title;
+        console.log(post.data.title);
+        const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
+        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
+        postScore.textContent = post.data.score;
+        newPost.appendChild(postScore);
+        newPost.appendChild(postTitle);
+        newRedditLane.appendChild(newPost);
+    });
+}
+
 addRedditbutton.addEventListener("click",()=>{
     if(buttonContainer.childElementCount===1){
         // create menu
@@ -67,18 +85,7 @@ addRedditbutton.addEventListener("click",()=>{
                         newRedditLane.innerHTML = "";
                         newRedditLane.appendChild(newRedditLaneHeader);
                         const subRedditData = await getSubRedditData(headerTitle.textContent.split("/")[2]);
-                        subRedditData.forEach(post=>{
-                            const newPost = document.createElement("div");
-                            newPost.classList.add("reddit-post");
-                            newPost.classList.add("reddit-post-border");
-                            const postScore = document.createElement("span");
-                            const postTitle = document.createElement("span");
-                            postTitle.textContent = post.data.title;
-                            postScore.textContent = post.data.score;
-                            newPost.appendChild(postScore);
-                            newPost.appendChild(postTitle);
-                            newRedditLane.appendChild(newPost);
-                        });
+                        renderPosts(subRedditData,newRedditLane);
                     });
                     const removeButton = document.createElement("button");
                     removeButton.textContent = "Delete";
@@ -106,21 +113,7 @@ addRedditbutton.addEventListener("click",()=>{
                 if(mainContainer.childElementCount===3){
                     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
                     mainContainer.innerHTML = "";
-
-                    subRedditData.forEach(post=>{
-                        const newPost = document.createElement("div");
-                        newPost.classList.add("reddit-post");
-                        newPost.classList.add("reddit-post-border");
-                        const postScore = document.createElement("span");
-                        const postTitle = document.createElement("a");
-                        postTitle.textContent = post.data.title;
-                        const urlPostTitle = post.data.title.slice(0,40).toLowercase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
-                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
-                        postScore.textContent = post.data.score;
-                        newPost.appendChild(postScore);
-                        newPost.appendChild(postTitle);
-                        newRedditLane.appendChild(newPost);
-                    });
+                    renderPosts(subRedditData,newRedditLane);
                     newRedditLane.id = "reddit-lane-3";
                     mainContainer.appendChild(newRedditLane);
                     previousLanes.forEach(lane=>{
@@ -132,21 +125,7 @@ addRedditbutton.addEventListener("click",()=>{
                     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
                     mainContainer.innerHTML = "";
                     newRedditLane.classList.add("reddit-lane-border-right");
-
-                    subRedditData.forEach(post=>{
-                        const newPost = document.createElement("div");
-                        newPost.classList.add("reddit-post");
-                        newPost.classList.add("reddit-post-border");
-                        const postScore = document.createElement("span");
-                        const postTitle = document.createElement("a");
-                        postTitle.textContent = post.data.title;
-                        const urlPostTitle = post.data.title.slice(0,40).toLowercase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
-                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
-                        postScore.textContent = post.data.score;
-                        newPost.appendChild(postScore);
-                        newPost.appendChild(postTitle);
-                        newRedditLane.appendChild(newPost);
-                    });
+                    renderPosts(subRedditData,newRedditLane);
                     newRedditLane.id = "reddit-lane-2";
                     mainContainer.appendChild(newRedditLane);
                     previousLanes.forEach(lane=>{
@@ -156,24 +135,7 @@ addRedditbutton.addEventListener("click",()=>{
                 }else if(mainContainer.childElementCount===1){
                     newRedditLane.classList.add("reddit-lane-border-right");
                     console.log(subRedditData);
-                    subRedditData.forEach((post)=>{
-                        const newPost = document.createElement("div");
-                        newPost.classList.add("reddit-post");
-                        newPost.classList.add("reddit-post-border");
-                        
-                        const postScore = document.createElement("span");
-                        const postTitle = document.createElement("a");
-                        postTitle.textContent = post.data.title;
-                        const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
-                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
-                        postScore.textContent = post.data.score;
-    
-                        newPost.appendChild(postScore);
-                        newPost.appendChild(postTitle);
-                        newRedditLane.appendChild(newPost);
-    
-                    });
-    
+                    renderPosts(subRedditData,newRedditLane);
                     mainContainer.innerHTML = "";
                     newRedditLane.id = "reddit-lane-1";
                     mainContainer.appendChild(newRedditLane);
