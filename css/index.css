@@ -40,7 +40,7 @@ body{
     border-bottom: 2px solid white;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 .reddit-post{

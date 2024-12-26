@@ -112,8 +112,10 @@ addRedditbutton.addEventListener("click",()=>{
                         newPost.classList.add("reddit-post");
                         newPost.classList.add("reddit-post-border");
                         const postScore = document.createElement("span");
-                        const postTitle = document.createElement("span");
+                        const postTitle = document.createElement("a");
                         postTitle.textContent = post.data.title;
+                        const urlPostTitle = post.data.title.slice(0,40).toLowercase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
+                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
                         postScore.textContent = post.data.score;
                         newPost.appendChild(postScore);
                         newPost.appendChild(postTitle);
@@ -136,10 +138,11 @@ addRedditbutton.addEventListener("click",()=>{
                         newPost.classList.add("reddit-post");
                         newPost.classList.add("reddit-post-border");
                         const postScore = document.createElement("span");
-                        const postTitle = document.createElement("span");
+                        const postTitle = document.createElement("a");
                         postTitle.textContent = post.data.title;
+                        const urlPostTitle = post.data.title.slice(0,40).toLowercase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
+                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
                         postScore.textContent = post.data.score;
-    
                         newPost.appendChild(postScore);
                         newPost.appendChild(postTitle);
                         newRedditLane.appendChild(newPost);
@@ -159,8 +162,10 @@ addRedditbutton.addEventListener("click",()=>{
                         newPost.classList.add("reddit-post-border");
                         
                         const postScore = document.createElement("span");
-                        const postTitle = document.createElement("span");
+                        const postTitle = document.createElement("a");
                         postTitle.textContent = post.data.title;
+                        const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
+                        postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
                         postScore.textContent = post.data.score;
     
                         newPost.appendChild(postScore);
