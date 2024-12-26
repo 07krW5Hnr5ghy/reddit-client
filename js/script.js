@@ -83,8 +83,17 @@ addRedditbutton.addEventListener("click",()=>{
                     const removeButton = document.createElement("button");
                     removeButton.textContent = "Delete";
                     removeButton.addEventListener("click",(e)=>{
-                        console.log(e);
+                        const lanePointer = e.target.parentElement.parentElement.parentElement;
+                        console.log(e.target.parentElement.parentElement.parentElement);
                         console.log(mainContainer.children);
+                        mainContainer.removeChild(lanePointer);
+                        console.log(mainContainer.querySelectorAll(".reddit-lane"));
+                        if(mainContainer.childElementCount===2){
+                            mainContainer.appendChild(buttonContainer);
+                            buttonContainer.classList.add("add-reddit-button-wrapper-left-border");
+                        }else{
+                            buttonContainer.classList.remove("add-reddit-button-wrapper-left-border");
+                        }
                     });
                     subMenu.appendChild(refreshButton);
                     subMenu.appendChild(removeButton);
@@ -110,7 +119,7 @@ addRedditbutton.addEventListener("click",()=>{
                         newPost.appendChild(postTitle);
                         newRedditLane.appendChild(newPost);
                     });
-
+                    newRedditLane.id = "reddit-lane-3";
                     mainContainer.appendChild(newRedditLane);
                     previousLanes.forEach(lane=>{
                         lane.classList.remove("reddit-lane-border-right");
@@ -135,7 +144,7 @@ addRedditbutton.addEventListener("click",()=>{
                         newPost.appendChild(postTitle);
                         newRedditLane.appendChild(newPost);
                     });
-
+                    newRedditLane.id = "reddit-lane-2";
                     mainContainer.appendChild(newRedditLane);
                     previousLanes.forEach(lane=>{
                         mainContainer.appendChild(lane);
@@ -144,7 +153,7 @@ addRedditbutton.addEventListener("click",()=>{
                 }else if(mainContainer.childElementCount===1){
                     newRedditLane.classList.add("reddit-lane-border-right");
                     console.log(subRedditData);
-                    subRedditData.forEach((post,index)=>{
+                    subRedditData.forEach((post)=>{
                         const newPost = document.createElement("div");
                         newPost.classList.add("reddit-post");
                         newPost.classList.add("reddit-post-border");
@@ -161,7 +170,7 @@ addRedditbutton.addEventListener("click",()=>{
                     });
     
                     mainContainer.innerHTML = "";
-    
+                    newRedditLane.id = "reddit-lane-1";
                     mainContainer.appendChild(newRedditLane);
                     mainContainer.appendChild(buttonContainer);
                 }

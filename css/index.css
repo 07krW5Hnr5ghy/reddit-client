@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: start;
     align-items: stretch;
-    border: 2px solid black;
+    border: 1px solid black;
     min-height: 100vh;
 }
 .add-reddit-menu{
@@ -20,13 +20,15 @@
     align-items: start;
     overflow-x: scroll;
     min-height: 100vh;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
-.reddit-lane-border-right{
+/* .reddit-lane-border-right{
     border-right: 2px solid black;
 }
 .reddit-lane-border-left{
     border-left: 2px solid black;
-}
+} */
 .reddit-lane-header{
     width: 100%;
     border-bottom: 2px solid black;
@@ -46,4 +48,7 @@
 }
 .reddit-post-border{
     border-bottom: 2px solid black;
+}
+.add-reddit-button-wrapper-left-border{
+    border-left: 1px solid black;
 }
