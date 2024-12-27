@@ -38,7 +38,7 @@ function renderPosts(posts,newRedditLane){
         postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
         postScore.textContent = post.data.score;
         const scoreIcon = document.createElement("span");
-        scoreIcon.textContent = " ^ ";
+        scoreIcon.innerHTML = '<i class="fa-solid fa-angle-up"></i>';
         newPost.appendChild(postScore);
         newPost.appendChild(scoreIcon);
         newPost.appendChild(postTitle);
