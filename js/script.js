@@ -74,6 +74,7 @@ addRedditbutton.addEventListener("click",()=>{
                 newRedditLaneHeader.classList.add("reddit-lane-header");
                 const headerTitle = document.createElement("span");
                 headerTitle.textContent = `/r/${subRedditInput.value}`;
+                subRedditInput.value = "";
                 const headerButton = document.createElement("button");
                 headerButton.classList.add("header-button");
                 headerButton.type = "button";
