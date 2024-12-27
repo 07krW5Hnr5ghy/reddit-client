@@ -32,6 +32,7 @@ function renderPosts(posts,newRedditLane){
         newPost.classList.add("reddit-post-border");
         const postScore = document.createElement("span");
         const postTitle = document.createElement("a");
+        postTitle.classList.add("post-title");
         postTitle.textContent = post.data.title;
         const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
         postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;

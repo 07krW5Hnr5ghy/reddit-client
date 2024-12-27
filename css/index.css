@@ -83,7 +83,6 @@ body{
 .delete-button{
     border-top: 1px solid white;
 }
-
 .reddit-post{
     display: flex;
     flex-direction: row;
@@ -98,4 +97,11 @@ body{
 }
 .add-reddit-button-wrapper-left-border{
     border-left: 1px solid white;
+}
+.post-title{
+    text-decoration: none;
+    color:white;
+}
+.post-title:hover{
+    cursor: pointer;
 }
