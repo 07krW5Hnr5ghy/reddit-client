@@ -33,7 +33,6 @@ function renderPosts(posts,newRedditLane){
         const postScore = document.createElement("span");
         const postTitle = document.createElement("a");
         postTitle.textContent = post.data.title;
-        console.log(post.data.title);
         const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
         postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
         postScore.textContent = post.data.score;
@@ -75,37 +74,46 @@ addRedditbutton.addEventListener("click",()=>{
                 const headerTitle = document.createElement("span");
                 headerTitle.textContent = `/r/${subRedditInput.value}`;
                 const headerButton = document.createElement("button");
+                headerButton.classList.add("header-button");
                 headerButton.type = "button";
                 headerButton.innerHTML = '<i class="fa-solid fa-ellipsis-vertical"></i>';
-                headerButton.addEventListener("click",()=>{
-                    const subMenu = document.createElement("div");
-                    subMenu.classList.add("sub-menu");
-                    const refreshButton = document.createElement("button");
-                    refreshButton.classList.add("sub-menu-button");
-                    refreshButton.textContent = "Refresh";
-                    refreshButton.addEventListener("click",async ()=>{
-                        newRedditLane.innerHTML = "";
-                        newRedditLane.appendChild(newRedditLaneHeader);
-                        const subRedditData = await getSubRedditData(headerTitle.textContent.split("/")[2]);
-                        renderPosts(subRedditData,newRedditLane);
-                    });
-                    const removeButton = document.createElement("button");
-                    removeButton.classList.add("delete-button");
-                    removeButton.classList.add("sub-menu-button");
-                    removeButton.textContent = "Delete";
-                    removeButton.addEventListener("click",(e)=>{
-                        const lanePointer = e.target.parentElement.parentElement.parentElement;
-                        mainContainer.removeChild(lanePointer);
-                        if(mainContainer.childElementCount===2){
-                            mainContainer.appendChild(buttonContainer);
-                            buttonContainer.classList.add("add-reddit-button-wrapper-left-border");
-                        }else{
-                            buttonContainer.classList.remove("add-reddit-button-wrapper-left-border");
-                        }
-                    });
-                    subMenu.appendChild(refreshButton);
-                    subMenu.appendChild(removeButton);
-                    newRedditLaneHeader.appendChild(subMenu);
+                // reddit lane sub menu
+                const subMenu = document.createElement("div");
+                subMenu.classList.add("sub-menu");
+                const refreshButton = document.createElement("button");
+                refreshButton.classList.add("sub-menu-button");
+                refreshButton.textContent = "Refresh";
+                refreshButton.addEventListener("click",async ()=>{
+                    newRedditLane.innerHTML = "";
+                    newRedditLane.appendChild(newRedditLaneHeader);
+                    const subRedditData = await getSubRedditData(headerTitle.textContent.split("/")[2]);
+                    renderPosts(subRedditData,newRedditLane);
+                });
+                const removeButton = document.createElement("button");
+                removeButton.classList.add("delete-button");
+                removeButton.classList.add("sub-menu-button");
+                removeButton.textContent = "Delete";
+                removeButton.addEventListener("click",(e)=>{
+                    const lanePointer = e.target.parentElement.parentElement.parentElement;
+                    mainContainer.removeChild(lanePointer);
+                    if(mainContainer.childElementCount===2){
+                        mainContainer.appendChild(buttonContainer);
+                        buttonContainer.classList.add("add-reddit-button-wrapper-left-border");
+                    }else{
+                        buttonContainer.classList.remove("add-reddit-button-wrapper-left-border");
+                    }
+                });
+                subMenu.appendChild(refreshButton);
+                subMenu.appendChild(removeButton);
+                newRedditLaneHeader.appendChild(subMenu);
+                subMenu.style.display = "none";
+                headerButton.addEventListener("click",(e)=>{
+                    const subMenuPointer = e.target.parentElement.childNodes[0];
+                    if(subMenuPointer.style.display==="flex"){
+                        subMenuPointer.style.display="none";
+                    }else if(subMenuPointer.style.display==="none"){
+                        subMenuPointer.style.display="flex";
+                    }
                 });
                 newRedditLaneHeader.appendChild(headerTitle);
                 newRedditLaneHeader.appendChild(headerButton);
@@ -118,11 +126,14 @@ addRedditbutton.addEventListener("click",()=>{
                     newRedditLane.id = "reddit-lane-3";
                     mainContainer.appendChild(newRedditLane);
                     previousLanes.forEach(lane=>{
-                        lane.classList.remove("reddit-lane-border-right");
-                        lane.classList.add("reddit-lane-border-left");
+                        if(lane.id="reddit-lane-1"){
+                            lane.classList.add("reddit-lane-no-border");
+                            lane.classList.add("reddit-lane-left-border");
+                        }
                         mainContainer.appendChild(lane);
                     }); 
                 }else if(mainContainer.childElementCount===2){
+                    console.log("two elements");
                     const previousLanes = Object.values(mainContainer.children).slice(0,mainContainer.children.length-1);
                     mainContainer.innerHTML = "";
                     newRedditLane.classList.add("reddit-lane-border-right");

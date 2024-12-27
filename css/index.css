@@ -26,14 +26,37 @@ body{
     align-items: start;
     overflow-x: scroll;
     min-height: 100vh;
-    border-left: 1px solid white;
     border-right: 1px solid white;
-    border-top: 1px solid white;
+}
+.reddit-lane-no-border{
+    border: none;
+}
+.reddit-lane-left-border{
+    border-left: 1px solid white;
+}
+.reddit-lane-header{
+    width: 100%;
     border-bottom: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+.header-button{
+    border: none;
+    padding: 5px;
+    color:white;
+    background-color: #0e1113;
+}
+.header-button:hover{
+    color:#0e1113;
+    background: white;
+    cursor: pointer;
 }
 .sub-menu{
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -60,15 +83,7 @@ body{
 .delete-button{
     border-top: 1px solid white;
 }
-.reddit-lane-header{
-    width: 100%;
-    border-bottom: 2px solid white;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    position: relative;
-}
+
 .reddit-post{
     display: flex;
     flex-direction: row;
@@ -79,7 +94,7 @@ body{
     width: 100%;
 }
 .reddit-post-border{
-    border-bottom: 2px solid white;
+    border-bottom: 1px solid white;
 }
 .add-reddit-button-wrapper-left-border{
     border-left: 1px solid white;
