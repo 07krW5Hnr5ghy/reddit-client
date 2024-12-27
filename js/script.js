@@ -37,7 +37,10 @@ function renderPosts(posts,newRedditLane){
         const urlPostTitle = post.data.title.slice(0,40).toLowerCase().replace(/[^a-zA-Z0-9\s]/g,"").replace(/\s/g,"_");
         postTitle.href = `https://reddit.com/r/${post.data.subreddit}/comments/${post.data.id}/${urlPostTitle}`;
         postScore.textContent = post.data.score;
+        const scoreIcon = document.createElement("span");
+        scoreIcon.textContent = " ^ ";
         newPost.appendChild(postScore);
+        newPost.appendChild(scoreIcon);
         newPost.appendChild(postTitle);
         newRedditLane.appendChild(newPost);
     });
