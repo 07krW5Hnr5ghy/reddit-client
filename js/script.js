@@ -79,7 +79,9 @@ addRedditbutton.addEventListener("click",()=>{
                 headerButton.innerHTML = '<i class="fa-solid fa-ellipsis-vertical"></i>';
                 headerButton.addEventListener("click",()=>{
                     const subMenu = document.createElement("div");
+                    subMenu.classList.add("sub-menu");
                     const refreshButton = document.createElement("button");
+                    refreshButton.classList.add("sub-menu-button");
                     refreshButton.textContent = "Refresh";
                     refreshButton.addEventListener("click",async ()=>{
                         newRedditLane.innerHTML = "";
@@ -88,13 +90,12 @@ addRedditbutton.addEventListener("click",()=>{
                         renderPosts(subRedditData,newRedditLane);
                     });
                     const removeButton = document.createElement("button");
+                    removeButton.classList.add("delete-button");
+                    removeButton.classList.add("sub-menu-button");
                     removeButton.textContent = "Delete";
                     removeButton.addEventListener("click",(e)=>{
                         const lanePointer = e.target.parentElement.parentElement.parentElement;
-                        console.log(e.target.parentElement.parentElement.parentElement);
-                        console.log(mainContainer.children);
                         mainContainer.removeChild(lanePointer);
-                        console.log(mainContainer.querySelectorAll(".reddit-lane"));
                         if(mainContainer.childElementCount===2){
                             mainContainer.appendChild(buttonContainer);
                             buttonContainer.classList.add("add-reddit-button-wrapper-left-border");
@@ -134,7 +135,6 @@ addRedditbutton.addEventListener("click",()=>{
                     mainContainer.appendChild(buttonContainer);
                 }else if(mainContainer.childElementCount===1){
                     newRedditLane.classList.add("reddit-lane-border-right");
-                    console.log(subRedditData);
                     renderPosts(subRedditData,newRedditLane);
                     mainContainer.innerHTML = "";
                     newRedditLane.id = "reddit-lane-1";
